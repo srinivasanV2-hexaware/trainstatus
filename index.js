@@ -38,7 +38,7 @@ var processWebhook = function (request, response) {
     async function pnrStatus(agent) {
         var pnr = request.body.queryResult.parameters.pnr;
 
-        var requestpromise = require("request-promise");
+        var requestpromise = require("request");
         agent.add(`Here is the status for your pnr no ${pnr}`);
 
         var options = {
@@ -50,7 +50,7 @@ var processWebhook = function (request, response) {
             }
         };
 
-        await requestpromise(options).then( (body)=>{
+        await requestpromise(options).then( (error,body,response)=>{
             
             if (error) throw new Error(error);
 
