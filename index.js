@@ -87,16 +87,16 @@ var processWebhook = function (request, response) {
     // agent.add(new Suggestion('Suggestion'))
 
 
-    console.log("-------------Srini2-------------");
-    agent.add('srini1s')
+    // console.log("-------------Srini2-------------");
+    // agent.add('srini1s')
 
 
-}
-let intentMap = new Map();
-intentMap.set('Default Welcome Intent', welcome);
-intentMap.set('pnr status', pnrStatus)
-intentMap.set('Default Fallback Intent', fallback);
-// intentMap.set('your intent name here', yourFunctionHandler);
-// intentMap.set('your intent name here', googleAssistantHandler);
-agent.handleRequest(intentMap);
+
+    let intentMap = new Map();
+    intentMap.set('Default Welcome Intent', welcome);
+    intentMap.set('pnr status', pnrStatus)
+    intentMap.set('Default Fallback Intent', fallback);
+    // intentMap.set('your intent name here', yourFunctionHandler);
+    // intentMap.set('your intent name here', googleAssistantHandler);
+    agent.handleRequest(intentMap);
 }
