@@ -19,7 +19,7 @@ function callApis(pnr) {
     return new Promise((resolve, reject) => {
 
         var requestpromise = require("request");
-        agent.add(`Here is the status for your pnr no ${pnr}`);
+
 
         var options = {
             method: 'GET',
@@ -29,10 +29,17 @@ function callApis(pnr) {
                 'cache-control': 'no-cache'
             }
         };
-        requestpromise(options, (error, body, response) => {
-            if (error) reject(error);
-            if (body) resolve(body);
-        });
+        try {
+            requestpromise(options, (error, body, response) => {
+
+                if (body) resolve(body);
+            });
+        }
+        catch (e) {
+            // Call callback with error
+            reject(e);
+        }
+
     });
 }
 var processWebhook = function (request, response) {
@@ -40,8 +47,8 @@ var processWebhook = function (request, response) {
         request,
         response
     });
-    console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
-    console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
+    // console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
+    // console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
     function welcome(agent) {
         agent.add(`Welcome to my agent!`);
@@ -54,23 +61,39 @@ var processWebhook = function (request, response) {
 
     function pnrStatus(agent) {
         var pnr = request.body.queryResult.parameters.pnr;
-        callApis(pnr).then(function (data) {
-            let body = data;
+        
+        return callApis(pnr).then(function (data) {
+            let body = data.body;
             if (body.hasOwnProperty("Error") && body.Error) {
                 agent.add(`${body.Error}`);
                 return false;
             }
-            console.log("-------------Data------------------")
-            agent.add(new Card({
-                title: "This is the card Title",
-                imageUrl: "https://www.dropbox.com/s/5t6nwhwd338p8jb/download3.png?raw=1",
-                text: `This is the body text of a card.  You can even use line\n  breaks and emoji! 💁`,
-            }))
-            agent.add(new Suggestion('Quick Reply'))
-            agent.add(new Suggestion('Suggestion'))
+            if (body) {
+                let resuldata = JSON.parse(body);
+                let startstationname = resuldata.BoardingStationName;
+                let arrivalstationame = resuldata.DestinationName;
+                let departureDate = resuldata.Doj;
+                let departureTime = resuldata.DepartureTime;
+                let trainname = resuldata.TrainName;
+                let trainNo = resuldata.TrainNo;
+                if (startstationname !== null) {
+                    agent.add(`Here is the status for your pnr no ${pnr}`);
+                    agent.add(new Card({
+                        title: `${startstationname} => ${arrivalstationame}`,
+                        imageUrl: "https://www.dropbox.com/s/5t6nwhwd338p8jb/download3.png?raw=1",
+                        text: `**Departure:** ${departureDate} ${departureTime} \n\n **Train Details:** ${trainname}(${trainNo})`,
+                    }))
+                    agent.add(new Suggestion('Show More'))
+                }
+                else {
+                    agent.add('That was a wrong input!!! Please try again')
+                }
+
+            }
 
         }).catch((error) => {
-            agent.add(error)
+
+            console.log(error)
         });
 
 
