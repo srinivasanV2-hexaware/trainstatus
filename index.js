@@ -66,7 +66,7 @@ var processWebhook = function (request, response) {
                 .addSimpleResponse('Do you need anything else?')
                 .addBasicCard(app1.buildBasicCard(`**Departure:** \n\n\n\n
                 s\n 
-                *Est:* ${estimatedd.substring(0, estimatedd.length - 4)} \n\n 
+                *Est:* s \n\n 
                 s \n\n**Arrival:** \n\n s \n\n
                 s\n 
                 *Est:* s \n\n s`)
