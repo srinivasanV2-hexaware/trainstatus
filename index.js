@@ -51,10 +51,6 @@ var processWebhook = function (request, response) {
                 agent.add(`${body.Error}`);
 
         });
-
-
-
-
     }
     let intentMap = new Map();
     intentMap.set('Default Welcome Intent', welcome);
