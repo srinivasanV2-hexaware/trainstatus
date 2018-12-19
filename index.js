@@ -52,13 +52,14 @@ var processWebhook = function (request, response) {
                 return false;
             }
             console.log("-----------------------Srini------------------")
-            agent.add(new Card({
-                title: "This is the card Title",
-                imageUrl: "https://www.dropbox.com/s/5t6nwhwd338p8jb/download3.png?raw=1",
-            }))
-            agent.add(new Suggestion('Quick Reply'))
-            agent.add(new Suggestion('Suggestion'))
+         
         });
+        agent.add(new Card({
+            title: "This is the card Title",
+            imageUrl: "https://www.dropbox.com/s/5t6nwhwd338p8jb/download3.png?raw=1",
+        }))
+        agent.add(new Suggestion('Quick Reply'))
+        agent.add(new Suggestion('Suggestion'))
     }
     let intentMap = new Map();
     intentMap.set('Default Welcome Intent', welcome);
