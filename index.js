@@ -60,13 +60,28 @@ var processWebhook = function (request, response) {
             }
             console.log("-----------------------Srini------------------")
             let conv = agent.conv();
-            agent.add(new Card({
-                title: "This is the card Title",
-                imageUrl: "https://www.dropbox.com/s/5t6nwhwd338p8jb/download3.png?raw=1",
-                text: `This is the body text of a card.  You can even use line\n  breaks and emoji! 💁`,
-            }))
-            agent.add(new Suggestion('Quick Reply'))
-            agent.add(new Suggestion('Suggestion'))
+            conv.ask(conv.buildRichResponse()
+                // Create a basic card and add it to the rich response
+
+                .addSimpleResponse('Do you need anything else?')
+                .addBasicCard(app1.buildBasicCard(`**Departure:** \n\n\n\n
+                s\n 
+                *Est:* ${estimatedd.substring(0, estimatedd.length - 4)} \n\n 
+                s \n\n**Arrival:** \n\n s \n\n
+                s\n 
+                *Est:* s \n\n s`)
+                    .setTitle(`Flight Status  => `)
+                    .setImage(`https://www.dropbox.com/s/g7avz78npsqcm2n/flight647x404_101116021054.jpg?raw=1', 'Flight Status`)
+                )
+            );
+            agent.add(conv)
+            // agent.add(new Card({
+            //     title: "This is the card Title",
+            //     imageUrl: "https://www.dropbox.com/s/5t6nwhwd338p8jb/download3.png?raw=1",
+            //     text: `This is the body text of a card.  You can even use line\n  breaks and emoji! 💁`,
+            // }))
+            // agent.add(new Suggestion('Quick Reply'))
+            // agent.add(new Suggestion('Suggestion'))
 
         })
 
