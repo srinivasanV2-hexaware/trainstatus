@@ -60,20 +60,7 @@ var processWebhook = function (request, response) {
             }
             console.log("-----------------------Srini------------------")
             let conv = agents.conv();
-            conv.ask(conv.buildRichResponse()
-                // Create a basic card and add it to the rich response
-
-                .addSimpleResponse('Do you need anything else?')
-                .addBasicCard(app1.buildBasicCard(`**Departure:** \n\n\n\n
-                s\n 
-                *Est:* s \n\n 
-                s \n\n**Arrival:** \n\n s \n\n
-                s\n 
-                *Est:* s \n\n s`)
-                    .setTitle(`Flight Status  => `)
-                    .setImage(`https://www.dropbox.com/s/g7avz78npsqcm2n/flight647x404_101116021054.jpg?raw=1', 'Flight Status`)
-                )
-            );
+            conv.ask(`Hello`);
             agent.add(conv)
             // agent.add(new Card({
             //     title: "This is the card Title",
