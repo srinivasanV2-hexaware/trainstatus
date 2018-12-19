@@ -50,7 +50,7 @@ var processWebhook = function (request, response) {
             }
         };
 
-        requestpromise(options).then(function (body) {
+        requestpromise(options).then( (body)=>{
             if (error) throw new Error(error);
 
             if (body.hasOwnProperty("Error") && body.Error) {
@@ -66,7 +66,7 @@ var processWebhook = function (request, response) {
             agent.add(new Suggestion('Quick Reply'))
             agent.add(new Suggestion('Suggestion'))
             
-        }) .catch(function (err) {
+        }) .catch( (err) =>{
             agent.add(`Something went wrong...`);
         });
         
