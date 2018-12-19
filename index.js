@@ -9,6 +9,7 @@ const {
     Card,
     Suggestion
 } = require('dialogflow-fulfillment');
+app.get('/', (req, res) => res.send('success'))
 app.post('/', (req, res) => processWebhook(req, res));
 app.listen(3000, () => console.log('App listening on port 3000!'));
 var processWebhook = function (request, response) {
