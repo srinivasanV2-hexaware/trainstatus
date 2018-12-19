@@ -74,7 +74,7 @@ var processWebhook = function (request, response) {
         });
 
 
-        if (error) throw new Error(error);
+
 
     }
 
