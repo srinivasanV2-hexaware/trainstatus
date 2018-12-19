@@ -47,7 +47,9 @@ var processWebhook = function (request, response) {
         requestpromise(options, function (error, response, body) {
             if (error) throw new Error(error);
 
-            console.log(body);
+            if (body.hasOwnProperty("Error") && body.Error)
+                agent.add(`${body.Error}`);
+
         });
 
 
