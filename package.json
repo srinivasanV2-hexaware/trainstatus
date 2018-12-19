@@ -1,20 +1,22 @@
 {
-    "name": "trainStatus",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "node index.js"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-      "actions-on-google": "^2.5.0",
-      "dialogflow-fulfillment": "^0.6.1",
-      "express": "^4.16.4",
-      "protobufjs": "~6.8.8",
-      "request": "^2.88.0"
-    }
+  "name": "trainStatus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "actions-on-google": "^2.5.0",
+    "dialogflow-fulfillment": "^0.6.1",
+    "express": "^4.16.4",
+    "promise": "^8.0.2",
+    "protobufjs": "~6.8.8",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
   }
+}

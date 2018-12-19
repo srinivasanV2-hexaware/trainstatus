@@ -1,5 +1,8 @@
 const express = require('express');
 var requestAPI = require('request');
+var Promise = require('promise');
+var rp = require('request-promise');
+
 const app = express();
 app.use(express.json());
 const {
@@ -12,6 +15,9 @@ const {
 app.get('/', (req, res) => res.send('success'))
 app.post('/', (req, res) => processWebhook(req, res));
 app.listen(process.env.PORT || 3000, () => console.log('App listening on port 3000!'));
+function callApis(){
+
+}
 var processWebhook = function (request, response) {
     const agent = new WebhookClient({
         request,
@@ -32,7 +38,7 @@ var processWebhook = function (request, response) {
     function pnrStatus(agent) {
         var pnr = request.body.queryResult.parameters.pnr;
 
-        var requestpromise = require("request");
+        var requestpromise = require("request-promise");
         agent.add(`Here is the status for your pnr no ${pnr}`);
 
         var options = {
@@ -44,7 +50,7 @@ var processWebhook = function (request, response) {
             }
         };
 
-        requestpromise(options, function (error, response, body) {
+        requestpromise(options).then(function (body) {
             if (error) throw new Error(error);
 
             if (body.hasOwnProperty("Error") && body.Error) {
@@ -59,6 +65,9 @@ var processWebhook = function (request, response) {
             }))
             agent.add(new Suggestion('Quick Reply'))
             agent.add(new Suggestion('Suggestion'))
+            
+        }) .catch(function (err) {
+            agent.add(`Something went wrong...`);
         });
         
     }
