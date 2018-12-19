@@ -47,14 +47,17 @@ var processWebhook = function (request, response) {
         requestpromise(options, function (error, response, body) {
             if (error) throw new Error(error);
 
-            if (body.hasOwnProperty("Error") && body.Error)
+            if (body.hasOwnProperty("Error") && body.Error) {
                 agent.add(`${body.Error}`);
-           agent.add(new Card({
-               title: "This is the card Title",
-               imageUrl:"https://www.dropbox.com/s/5t6nwhwd338p8jb/download3.png?raw=1",
-           }))
-           agent.add(new Suggestion('Quick Reply'))
-           agent.add(new Suggestion('Suggestion'))
+                return false;
+            }
+
+            agent.add(new Card({
+                title: "This is the card Title",
+                imageUrl: "https://www.dropbox.com/s/5t6nwhwd338p8jb/download3.png?raw=1",
+            }))
+            agent.add(new Suggestion('Quick Reply'))
+            agent.add(new Suggestion('Suggestion'))
         });
     }
     let intentMap = new Map();
