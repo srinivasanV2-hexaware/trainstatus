@@ -15,7 +15,7 @@ const {
 app.get('/', (req, res) => res.send('success'))
 app.post('/', (req, res) => processWebhook(req, res));
 app.listen(process.env.PORT || 3000, () => console.log('App listening on port 3000!'));
-function callApis(){
+function callApis() {
 
 }
 var processWebhook = function (request, response) {
@@ -50,8 +50,8 @@ var processWebhook = function (request, response) {
             }
         };
 
-        await requestpromise(options).then( (error,body,response)=>{
-            
+        await requestpromise(options, (error, body, response) => {
+
             if (error) throw new Error(error);
 
             if (body.hasOwnProperty("Error") && body.Error) {
@@ -59,7 +59,7 @@ var processWebhook = function (request, response) {
                 return false;
             }
             console.log("-----------------------Srini------------------")
-            let conv = agent.conv(); 
+            let conv = agent.conv();
             agent.add(new Card({
                 title: "This is the card Title",
                 imageUrl: "https://www.dropbox.com/s/5t6nwhwd338p8jb/download3.png?raw=1",
@@ -67,11 +67,11 @@ var processWebhook = function (request, response) {
             }))
             agent.add(new Suggestion('Quick Reply'))
             agent.add(new Suggestion('Suggestion'))
-            
-        }) .catch( (err) =>{
+
+        }).catch((err) => {
             agent.add(`Something went wrong...`);
         });
-        
+
     }
     let intentMap = new Map();
     intentMap.set('Default Welcome Intent', welcome);
