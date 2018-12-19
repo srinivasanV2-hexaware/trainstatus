@@ -70,7 +70,7 @@ var processWebhook = function (request, response) {
             agent.add(new Suggestion('Suggestion'))
 
         }).catch((error) => {
-
+            agent.add(error)
         });
 
 
