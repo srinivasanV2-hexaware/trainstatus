@@ -49,8 +49,7 @@ var processWebhook = function (request, response) {
                 'cache-control': 'no-cache'
             }
         };
-        let agents=agent;
-        await requestpromise(options, (error, body, response) => {
+        return requestpromise(options, (error, body, response) => {
 
             if (error) throw new Error(error);
 
