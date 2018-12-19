@@ -49,7 +49,7 @@ var processWebhook = function (request, response) {
                 'cache-control': 'no-cache'
             }
         };
-
+        let agents=agent;
         await requestpromise(options, (error, body, response) => {
 
             if (error) throw new Error(error);
@@ -59,7 +59,7 @@ var processWebhook = function (request, response) {
                 return false;
             }
             console.log("-----------------------Srini------------------")
-            let conv = agent.conv();
+            let conv = agents.conv();
             conv.ask(conv.buildRichResponse()
                 // Create a basic card and add it to the rich response
 
@@ -84,6 +84,7 @@ var processWebhook = function (request, response) {
             // agent.add(new Suggestion('Suggestion'))
 
         })
+        
 
     }
     let intentMap = new Map();
