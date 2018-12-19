@@ -68,9 +68,7 @@ var processWebhook = function (request, response) {
             agent.add(new Suggestion('Quick Reply'))
             agent.add(new Suggestion('Suggestion'))
 
-        }).catch((err) => {
-            agent.add(`Something went wrong...`);
-        });
+        })
 
     }
     let intentMap = new Map();
