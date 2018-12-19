@@ -35,7 +35,7 @@ var processWebhook = function (request, response) {
         agent.add(`I'm sorry, can you try again?`);
     }
 
-    function pnrStatus(agent) {
+    async function pnrStatus(agent) {
         var pnr = request.body.queryResult.parameters.pnr;
 
         var requestpromise = require("request-promise");
@@ -50,7 +50,7 @@ var processWebhook = function (request, response) {
             }
         };
 
-        requestpromise(options).then( (body)=>{
+        await requestpromise(options).then( (body)=>{
             
             if (error) throw new Error(error);
 
